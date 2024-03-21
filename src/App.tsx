@@ -1,9 +1,9 @@
 function App() {
 
   return (
-      <div>
+      <h1 className="test-3xl">
         This is my App
-      </div>
+      </h1>
   )
 }
 
