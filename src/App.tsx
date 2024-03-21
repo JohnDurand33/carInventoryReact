@@ -1,10 +1,12 @@
+import Home from './pages/Home'
+
 function App() {
 
-  return (
-      <h1 className="test-3xl">
-        This is my App
-      </h1>
-  )
+    return (
+        <>
+        <Home />
+        </>
+    )
 }
 
 export default App
