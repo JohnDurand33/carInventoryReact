@@ -63,3 +63,23 @@ const CarForm = (props:CarFormProps) => {
 };
 
 export default CarForm;
+
+// State Management
+// Let's start by looking at a small React counter component. It tracks a number in component state, and increments the number when a button is clicked:
+
+// function Counter() {
+//   // STATE: a counter value
+//   const [counter, setCounter] = useState(0)
+
+//   // ACTION: code that causes an update to the state when something happens
+//   const increment = () => {
+//     setCounter(prevCounter => prevCounter + 1)
+//   }
+
+//   // VIEW: the UI definition
+//   return (
+//     <div>
+//       Value: {counter} <button onClick={increment}>Increment</button>
+//     </div>
+//   )
+// }
