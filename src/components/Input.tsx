@@ -16,7 +16,6 @@ const Input = forwardRef((props: InputType, ref) => {
             type="text"
             {...props}
         >
-        
         </TextField>
     )
 });

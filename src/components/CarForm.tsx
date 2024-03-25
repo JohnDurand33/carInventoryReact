@@ -1,30 +1,59 @@
 import Input from "./Input";
 import Button from "./Button";
 
-const ContactForm = () => {
+import { useForm } from "react-hook-form";
+interface CarFormProps {
+    id?: string,
+    data?: {}
+}
+
+const CarForm = (props:CarFormProps) => {
+    const { register, handleSubmit } = useForm({})
+    
+    const onSubmit = () => {
+        console.log('pass');
+    }
+
     return (
         <div>
-            {/* Add Handle Function */}
-            <form onSubmit={() => console.log("submitted")}>
+            <form onSubmit={
+                handleSubmit(onSubmit)
+            }>
                 <div>
                     <label htmlFor="year">Year</label>
-                    <Input name="year" placeholder="Year" />
+                    <Input
+                        {...register("year")}
+                        name="year"
+                        placeholder="Year"
+                    />
                 </div>
                 <div>
                     <label htmlFor="color">Color</label>
-                    <Input name="color" placeholder="Color" />
+                    <Input
+                        {...register("color")}
+                        name="color"
+                        placeholder="Color"
+                    />
                 </div>
                 <div>
                     <label htmlFor="make">Make</label>
-                    <Input name="make" placeholder="Make" />
+                    <Input
+                        {...register("make")}
+                        name="make"
+                        placeholder="Make"
+                    />
                 </div>
                 <div>
                     <label htmlFor="model">Model</label>
-                    <Input name="model" placeholder="Model" />
+                    <Input
+                        {...register("model")}
+                        name="model"
+                        placeholder="Model"
+                    />
                 </div>
                 <div className="flex p-1 justify-center">
-                    <Button className="flex justify-end m-3 bg-slate-300 p-2 rounded hover:bg-slate-800 text-white"
-                    >Submit
+                    <Button className="flex justify-end m-3 bg-slate-400 p-2 rounded hover:bg-slate-800 text-white">
+                        Submit
                     </Button>
                 </div>
             </form>
@@ -33,4 +62,4 @@ const ContactForm = () => {
     );
 };
 
-export default ContactForm;
+export default CarForm;
