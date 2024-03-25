@@ -7,10 +7,11 @@ function Home() {
             <div
                 style={{ backgroundImage: `url(${imgUrl})`, height:`100 vh` }}
                 className="flex flex-row justify-center mx-auto bg-cover bg-fixed"
-            >Home
-            //     <div className="flex place-items-center h-screen">
-            //         <h3>Welcome To the Phonebook</h3>
-                </div>
+                >
+                    Home
+                    <div className="flex place-items-center h-screen">
+                        <h3>Welcome To the Phonebook</h3>
+                    </div>
             </div>
         </>
     );

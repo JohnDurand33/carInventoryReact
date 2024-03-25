@@ -8,9 +8,9 @@ interface ButtonProps {
 
 export default function Button( props: ButtonProps ) {
     return (
-    <div>
+    <button onClick={props.onClick} className={ props.className}>
         { props.children }
-    </div>
+    </button>
     )
 }
 

@@ -24,9 +24,9 @@ function App() {
                 <Route path={"/dashboard"} element={<Dashboard />}>
                     Dashboard
                 </Route> */}
-                <Route path={''} element={<Home />}>
+                {/* <Route path={''} element={<Home />}>
                     Home
-                </Route> 
+                </Route>  */}
             </Routes>
         </BrowserRouter>
     );
