@@ -27,3 +27,4 @@ const routes: RouteType[] = [
 ];
 
 export default routes
+

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
-import Modal from "./Modal"
+import Modal from "./Modal";
+import server_calls from "../api/server";
 
 function DataTable() {
     let [open, setOpen] = useState(false)
@@ -11,6 +12,10 @@ function DataTable() {
 
     const handleClose = () => {
         setOpen(false)
+    }
+
+    const getData = () => {
+        console.log(server_calls.get())
     }
 
     return (
@@ -34,6 +39,7 @@ function DataTable() {
                 </div>
             </div>
             {/* {Data Table Section} */}
+            <button onClick={getData}></button>
         </>
     );
 }
