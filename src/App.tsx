@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import routes from './config/routes';
 import Home from './pages/Home.tsx';
 import About from './pages/About.tsx';

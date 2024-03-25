@@ -1,3 +1,5 @@
+import CarForm from './CarForm'
+
 type Props = {
     open: boolean;
     onClose: () => void;
@@ -27,7 +29,7 @@ const Modal = (props: Props) => { /*Learn how to create Modals that disappear by
                         </p>
                     </div>
                     <div className="flex flex-col items-center text-center mt-3 p-2">
-                        New Car Form
+                        <CarForm />
                     </div>
                 </div>
             </div>
