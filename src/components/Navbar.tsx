@@ -36,11 +36,13 @@ function Navbar() {
             {isVisible ? (
                 <div className="w-full block flex-grow items-center">
                     <div className="text-sm lg:flex-grow">
-                        <Button className="p-3 m-5 bg-teal-400 justify-center">
+                        <Button
+                            onClick={clicked}
+                            className="p-3 m-5 bg-teal-400 justify-center"
+                        >
                             <div>
                                 <Link
                                     to="/"
-                                    onClick={clicked}
                                     className="flex place-items-center mt-4 lg:inline-block lg:mt-0
                                     text-teal-200 hover:text-white mr-4"
                                 >
@@ -48,11 +50,13 @@ function Navbar() {
                                 </Link>
                             </div>
                         </Button>
-                        <Button className="p-3 m-5 bg-teal-400 justify-center">
+                        <Button
+                            onClick={clicked}
+                            className="p-3 m-5 bg-teal-400 justify-center"
+                        >
                             <div>
                                 <Link
                                     to="/About"
-                                    onClick={clicked}
                                     className="flex place-items-center mt-4 lg:inline-block lg:mt-0
                                     text-teal-200 hover:text-white mr-4"
                                 >
@@ -60,11 +64,13 @@ function Navbar() {
                                 </Link>
                             </div>
                         </Button>
-                        <Button className="p-3 m-5 bg-teal-400 justify-center">
+                        <Button
+                            onClick={clicked}
+                            className="p-3 m-5 bg-teal-400 justify-center"
+                            >
                             <div>
                                 <Link
                                     to="/dashboard"
-                                    onClick={clicked}
                                     className="flex place-items-center mt-4 lg:inline-block lg:mt-0
                                     text-teal-200 hover:text-white mr-4"
                                 >
@@ -72,11 +78,13 @@ function Navbar() {
                                 </Link>
                             </div>
                         </Button>
-                        <Button className="p-3 m-5 bg-teal-400 justify-center">
+                        <Button
+                            onClick={clicked}
+                            className="p-3 m-5 bg-teal-400 justify-center"
+                            >
                             <div>
                                 <Link
                                     to="/collection"
-                                    onClick={clicked}
                                     className="flex place-items-center mt-4 lg:inline-block lg:mt-0
                                     text-teal-200 hover:text-white mr-4"
                                 >
