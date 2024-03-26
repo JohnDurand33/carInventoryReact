@@ -36,8 +36,6 @@ const CarForm = (props:CarFormProps) => {
         }
 
     }
-    
-}
 
     return (
         <div>

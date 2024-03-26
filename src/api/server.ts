@@ -7,7 +7,6 @@ const server_calls = {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Orogin": "*",
                     "x-access-token": `Bearer ${token}`,
                 },
             });
@@ -26,16 +25,56 @@ const server_calls = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*",
                     "x-access-token": `Bearer ${token}`
                 },
                 body: JSON.stringify(data)
             });
         
         if (!response.ok) {
-            throw new Error('Failed to fetch data from the server')
+            throw new Error('Failed to create new data on the server')
         }
+
+        return await response.json()
+    },
+
+    update: async (id: string, data: any = {}) => {
+        const response = await fetch(
+            `https://car-collections.onrender.com/api/cars/${id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-access-token": `Bearer ${token}`,
+                },
+                body: JSON.stringify(data),
+            }
+        );
+        
+        if (!response.ok) {
+            throw new Error('Failed to update data on the server');
+        }
+
+        return await response.json();
+    },
+
+    delete: async(id:string) => {
+        const response = await fetch(`https://car-collections.onrender.com/api/cars/${id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                        'Content-Type': 'application/json',
+                        "x-access-token": `Bearer ${token}`
+                    },
+            });
+        
+        if (!response.ok) {
+            throw new Error('Failed to delete data from the server');
+        }
+
+        return await response.json();
     }
 }
 
 export default server_calls
+
+// if errors put this in methods:   "Access-Control-Allow-Origin": "*", may need to remove !response commands for update and delete and return await response.json() command for delete function
