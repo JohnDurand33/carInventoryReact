@@ -71,7 +71,7 @@ const server_calls = {
             throw new Error('Failed to delete data from the server');
         }
 
-        return await response.json();
+        return;
     }
 }
 
