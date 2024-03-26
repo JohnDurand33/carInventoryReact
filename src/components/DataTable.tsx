@@ -2,10 +2,23 @@ import { useState } from "react";
 import Button from "./Button";
 import Modal from "./Modal";
 import server_calls from "../api/server";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+
+const columns: GridColDef[] = [
+    { field: 'id', headerName: "ID", width: 90, hideable: true },
+    { field: 'year', headerName: "Year", flex: 1 },
+    { field: 'color', headerName: "Color", flex: 1  },
+    { field: 'make', headerName: "Make", flex: 1  },
+    { field: 'model', headerName: "Model", flex: 2 }
+]
 
 function DataTable() {
-    let [open, setOpen] = useState(false)
-    
+
+    const [open, setOpen] = useState(false)
+    const { carData, getData } = useGetData();
+    const [ selectionModel, setSelectionModel ] = useState<any>([])
+    // TODO: write useGetData hook and selection model state change content
+
     const handleOpen = () => {
         setOpen(true)
     }
@@ -14,10 +27,7 @@ function DataTable() {
         setOpen(false)
     }
 
-    const getData = () => {
-        console.log(server_calls.get())
-    }
-
+    //TODO: add delete function to button
     return (
         <>
             <Modal
@@ -38,7 +48,15 @@ function DataTable() {
                     </Button>
                 </div>
             </div>
-            {/* {Data Table Section} */}
+            <div className={open ? "hidden" : "coniner mx-10 my-5 flex flex-col"}
+                style={{ height: 400, width: '100%' }}>
+                <h2 className="p-3 bg-slate-300 my-2 rounded">My Collection</h2>
+                <DataGrid rows={carData} columns={columns} rowsPerPageOptions={[5]} checkboxSelection={true}
+                    onRowSelectionModelChange={(item: any) => {
+                        setSelectionModel(item)
+                    }}
+                />
+            </div>
             <button onClick={getData}></button>
         </>
     );
