@@ -2,6 +2,11 @@ import Input from "./Input";
 import Button from "./Button";
 
 import { useForm } from "react-hook-form";
+import server_calls from "../api/server";
+import { useDispatch, useStore } from 'react-redux';
+import { chooseColor, chooseMake, chooseModel, chooseYear } from "../redux/slices/rootSlice";
+
+//interfaces
 interface CarFormProps {
     id?: string,
     data?: {}
@@ -9,16 +14,34 @@ interface CarFormProps {
 
 const CarForm = (props:CarFormProps) => {
     const { register, handleSubmit } = useForm({})
-    
-    const onSubmit = () => {
-        console.log('pass');
+    const dispatch = useDispatch();
+    const store = useStore();
+
+    const onSubmit = (data: any, event: any) => {
+        console.log(`ID: ${props.id}`);
+        if (props.id) {
+            server_calls.update(props.id, data);
+            console.log(`Updated: ${data} ${props.id}`);
+            setTimeout(() => { window.location.reload() }, 1000);
+            event.target.reset()
+        } else {
+            //Use dispatch to update our state in our store
+            dispatch(chooseYear(data.year));  // line saves data into the store
+            dispatch(chooseColor(data.color));
+            dispatch(chooseMake(data.make));
+            dispatch(chooseModel(data.model));
+
+            server_calls.create(store.getState()) // line fetches data from store and creates a new user
+            setTimeout(() => {window.location.reload()}, 1000)
+        }
+
     }
+    
+}
 
     return (
         <div>
-            <form onSubmit={
-                handleSubmit(onSubmit)
-            }>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label htmlFor="year">Year</label>
                     <Input
