@@ -7,28 +7,32 @@ const server_calls = {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
                     "x-access-token": `Bearer ${token}`,
                 },
-            });
+            }
+        );
 
         if (!response.ok) {
             throw new Error('Failed to fetch data from the server')
         }
 
-        return await response.json()
+        const data = await response.json();
+        return data
     },
-    // TODO: FINISH SERVER CALLS
 
     create: async (data: any = {}) => {
         const response = await fetch("https://car-collections.onrender.com/api/cars",
             {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
-                    "x-access-token": `Bearer ${token}`
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "x-access-token": `Bearer ${token}`,
                 },
-                body: JSON.stringify(data)
-            });
+                body: JSON.stringify(data),
+            }
+        );
         
         if (!response.ok) {
             throw new Error('Failed to create new data on the server')
@@ -37,13 +41,13 @@ const server_calls = {
         return await response.json()
     },
 
-    update: async (id: string, data: any = {}) => {
-        const response = await fetch(
-            `https://car-collections.onrender.com/api/cars/${id}`,
+    update: async (id:string, data: any = {}) => {
+        const response = await fetch(`https://car-collections.onrender.com/api/cars/${id}`,
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
                     "x-access-token": `Bearer ${token}`,
                 },
                 body: JSON.stringify(data),
@@ -60,12 +64,14 @@ const server_calls = {
     delete: async(id:string) => {
         const response = await fetch(`https://car-collections.onrender.com/api/cars/${id}`,
             {
-                method: 'DELETE',
+                method: "DELETE",
                 headers: {
-                        'Content-Type': 'application/json',
-                        "x-access-token": `Bearer ${token}`
-                    },
-            });
+                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin': '*',
+                    "x-access-token": `Bearer ${token}`,
+                },
+            }
+        );
         
         if (!response.ok) {
             throw new Error('Failed to delete data from the server');

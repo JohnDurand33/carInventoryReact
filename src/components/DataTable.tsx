@@ -3,6 +3,7 @@ import Button from "./Button";
 import Modal from "./Modal";
 import server_calls from "../api/server";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useGetData } from "../custom-hooks/FetchData";
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: "ID", width: 90, hideable: true },
@@ -16,8 +17,7 @@ function DataTable() {
 
     const [open, setOpen] = useState(false)
     const { carData, getData } = useGetData();
-    const [ selectionModel, setSelectionModel ] = useState<any>([])
-    // TODO: write useGetData hook and selection model state change content
+    const [ selectionModel, setSelectionModel ] = useState<string[]>([])
 
     const handleOpen = () => {
         setOpen(true)
@@ -27,37 +27,59 @@ function DataTable() {
         setOpen(false)
     }
 
-    //TODO: add delete function to button
+    const deleteData = () => {
+        server_calls.delete(selectionModel[0]);
+        getData();
+        console.log(`Selection Model: ${selectionModel}`);
+        setTimeout( () => { window.location.reload() }, 500)
+    }
+
+    // TODO - finish and test
     return (
         <>
-            <Modal
-                open={open}
-                onClose={handleClose}/>
+            <Modal id={selectionModel} open={open} onClose={handleClose} />
             <div className="flex flex-row">
                 <div>
                     <button
                         className="p-3 m-3 bg-slate-300 rounded hover:bg-slate-400 hover:text-white"
-                        onClick={() => handleOpen()}>
+                        onClick={() => handleOpen()}
+                    >
                         Add New Car
                     </button>
-                    <Button className="p-3 m-3 bg-slate-300 rounded hover:bg-slate-400 hover:text-white">
-                        Update Car
+                    <Button
+                        onClick={() => handleOpen()}
+                        className="p-3 m-3 bg-slate-300 rounded hover:bg-slate-400 hover:text-white"
+                    >
+                        Update
                     </Button>
-                    <Button className="p-3 m-3 bg-slate-300 rounded hover:bg-slate-400 hover:text-white">
-                        Remove Car
+                    <Button
+                        onClick={deleteData}
+                        className="p-3 m-3 bg-slate-300 rounded hover:bg-slate-400 hover:text-white"
+                    >
+                        Delete
                     </Button>
                 </div>
             </div>
-            <div className={open ? "hidden" : "coniner mx-10 my-5 flex flex-col"}
-                style={{ height: 400, width: '100%' }}>
-                <h2 className="p-3 bg-slate-300 my-2 rounded">My Collection</h2>
-                <DataGrid rows={carData} columns={columns} rowsPerPageOptions={[5]} checkboxSelection={true}
-                    onRowSelectionModelChange={(item: any) => {
-                        setSelectionModel(item)
-                    }}
-                />
+            <div className="flex flex-row">
+                <div
+                    className={
+                        open ? "hidden" : "coniner mx-10 my-5 flex flex-col"
+                    }
+                    style={{ height: 400, width: "100%" }}
+                >
+                    <h2 className="p-3 bg-slate-300 my-2 rounded">
+                        My Collection
+                    </h2>
+                    <DataGrid
+                        rows={carData}
+                        columns={columns}
+                        checkboxSelection={true}
+                        onRowSelectionModelChange={(item:any) => {
+                            setSelectionModel(item);
+                        }}
+                    />
+                </div>
             </div>
-            <button onClick={getData}></button>
         </>
     );
 }

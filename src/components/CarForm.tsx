@@ -11,8 +11,7 @@ import { chooseColor, chooseMake, chooseModel, chooseYear } from "../redux/slice
 
 //interfaces
 interface CarFormProps {
-    id?: string,
-    data?: {}
+    id?: string[]
 }
 
 const CarForm = (props:CarFormProps) => {
@@ -22,10 +21,12 @@ const CarForm = (props:CarFormProps) => {
 
     const onSubmit = (data: any, event: any) => {
         console.log(`ID: ${props.id}`);
-        if (props.id) {
-            server_calls.update(props.id, data);
+        console.log(props.id);
+        console.log(data);
+        if (props.id && props.id.length > 0) {
+            server_calls.update(props.id[0], data);
             console.log(`Updated: ${data} ${props.id}`);
-            setTimeout(() => { window.location.reload() }, 1000);
+            setTimeout(() => { window.location.reload() }, 500);
             event.target.reset()
         } else {
             //Use dispatch to update our state in our store
@@ -35,7 +36,7 @@ const CarForm = (props:CarFormProps) => {
             dispatch(chooseModel(data.model));
 
             server_calls.create(store.getState()) // line fetches data from store and creates a new user
-            setTimeout(() => {window.location.reload()}, 1000)
+            setTimeout(() => {window.location.reload()}, 500)
         }
 
     }
