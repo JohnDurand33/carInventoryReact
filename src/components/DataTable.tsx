@@ -18,6 +18,7 @@ function DataTable() {
     const [open, setOpen] = useState(false)
     const { carData, getData } = useGetData();
     const [ selectionModel, setSelectionModel ] = useState<string[]>([])
+    
 
     const handleOpen = () => {
         setOpen(true)
@@ -63,14 +64,14 @@ function DataTable() {
             <div className="flex flex-row">
                 <div
                     className={
-                        open ? "hidden" : "coniner mx-10 my-5 flex flex-col"
+                        open ? "hidden" : "container mx-10 my-5 flex flex-col"
                     }
                     style={{ height: 400, width: "100%" }}
                 >
-                    <h2 className="p-3 bg-slate-300 my-2 rounded">
-                        My Collection
+                    <h2 className="text-center font-serif font-bold p-3 bg-slate-300 my-2 rounded">
+                        The Collection
                     </h2>
-                    <DataGrid
+                    <DataGrid className='bg-white bg-opacity-70'
                         rows={carData}
                         columns={columns}
                         checkboxSelection={true}

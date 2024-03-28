@@ -3,6 +3,7 @@ import Navbar from './components/Navbar.tsx';
 import routes from "./config/routes";
 import { store } from './redux/store.ts';
 import { Provider } from 'react-redux';
+import AuthChecker from './auth/AuthChecker.tsx';
 
 function App() {
     return (
@@ -12,18 +13,27 @@ function App() {
                 <Routes>
                     {routes.map(
                         (
-                        route: any,
-                        index: any // same as below commented out code
+                            route: any,
+                            index: any // same as below commented out code
                         ) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            element={<route.component />}
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    route.protected ? (
+                                        <AuthChecker>
+                                            <route.component />
+                                        </AuthChecker>
+                                    ) : (
+                                        <route.component />
+                                    )
+                                }
                             />
-                    ))}
-            </Routes>
-        </Provider>
-    </BrowserRouter>
+                        )
+                    )}
+                </Routes>
+            </Provider>
+        </BrowserRouter>
     );
 }
 

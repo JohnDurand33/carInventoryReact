@@ -1,6 +1,6 @@
 function Home() {
 
-    const imgUrl = "https://res.cloudinary.com/dkeozpkpv/image/upload/v1711137384/landing_k39qzp.jpg";
+const imgUrl = "https://res.cloudinary.com/dkeozpkpv/image/upload/v1711137384/landing_k39qzp.jpg";
 
     return (
         <>

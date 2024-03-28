@@ -1,10 +1,24 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react"
+import { Link } from "react-router-dom"
 import Button from './Button.tsx'
+import { signInWithPopup, signOut } from "firebase/auth"
+import { auth, Providers } from '../config/firebase'
 
 function Navbar() {
     const [isVisible, setIsVisible] = useState(false)
     
+    const signOutOnClick = () => {
+        signOut(auth)
+        location.reload(); //refreshes page
+    }
+
+    const signInOnClick = async () => {
+        const response = await signInWithPopup(auth, Providers.google);
+        if (response.user) {
+            location.reload()
+        }
+    }
+
     const dropDown = () => {
         setIsVisible(!isVisible)
     }
@@ -67,24 +81,10 @@ function Navbar() {
                         <Button
                             onClick={clicked}
                             className="p-3 m-5 bg-teal-400 justify-center"
-                            >
+                        >
                             <div>
                                 <Link
                                     to="/dashboard"
-                                    className="flex place-items-center mt-4 lg:inline-block lg:mt-0
-                                    text-teal-200 hover:text-white mr-4"
-                                >
-                                    Dashboard
-                                </Link>
-                            </div>
-                        </Button>
-                        <Button
-                            onClick={clicked}
-                            className="p-3 m-5 bg-teal-400 justify-center"
-                            >
-                            <div>
-                                <Link
-                                    to="/collection"
                                     className="flex place-items-center mt-4 lg:inline-block lg:mt-0
                                     text-teal-200 hover:text-white mr-4"
                                 >
@@ -92,6 +92,37 @@ function Navbar() {
                                 </Link>
                             </div>
                         </Button>
+                        {!auth.currentUser ? (
+                            <Button className="p-3 m-5 bg-teal-400 justify-center">
+                                <div>
+                                    <Link
+                                        to="/"
+                                        onClick={() => {
+                                            signInOnClick();
+                                        }}
+                                        className="flex place-items-center mt-4 
+                                        lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
+                                    >
+                                        Login
+                                    </Link>
+                                </div>
+                            </Button>
+                        ) : (
+                            <Button className="p-3 m-5 bg-teal-400 justify-center">
+                                <div>
+                                    <Link
+                                        to="/"
+                                        onClick={() => {
+                                            signOutOnClick();
+                                        }}
+                                        className="flex place-items-center mt-4 
+                                        lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
+                                    >
+                                        LogOut
+                                    </Link>
+                                </div>
+                            </Button>
+                        )}
                     </div>
                 </div>
             ) : (
