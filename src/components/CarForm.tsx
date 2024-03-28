@@ -6,10 +6,9 @@ import server_calls from "../api/server";
 import { useDispatch, useStore } from 'react-redux';
 import { chooseColor, chooseMake, chooseModel, chooseYear } from "../redux/slices/rootSlice";
 
+import { useNavigate } from "react-router-dom";
 
 
-
-//interfaces
 interface CarFormProps {
     id?: string[]
 }
@@ -18,6 +17,7 @@ const CarForm = (props:CarFormProps) => {
     const { register, handleSubmit } = useForm({})
     const dispatch = useDispatch();
     const store = useStore();
+    const navigate = useNavigate();
 
     const onSubmit = (data: any, event: any) => {
         console.log(`ID: ${props.id}`);
@@ -26,7 +26,7 @@ const CarForm = (props:CarFormProps) => {
         if (props.id && props.id.length > 0) {
             server_calls.update(props.id[0], data);
             console.log(`Updated: ${data} ${props.id}`);
-            setTimeout(() => { window.location.reload() }, 500);
+            setTimeout(() => { navigate(0) }, 500);
             event.target.reset()
         } else {
             //Use dispatch to update our state in our store
@@ -36,7 +36,7 @@ const CarForm = (props:CarFormProps) => {
             dispatch(chooseModel(data.model));
 
             server_calls.create(store.getState()) // line fetches data from store and creates a new user
-            setTimeout(() => {window.location.reload()}, 500)
+            setTimeout(() => {navigate(0)}, 500)
         }
 
     }
