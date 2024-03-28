@@ -66,7 +66,7 @@ function DataTable() {
                     className={
                         open ? "hidden" : "container mx-10 my-5 flex flex-col"
                     }
-                    style={{ height: 400, width: "100%" }}
+                    style={{ height: 400, width: "90vw"}}
                 >
                     <h2 className="text-center font-serif font-bold p-3 bg-slate-300 my-2 rounded">
                         The Collection
