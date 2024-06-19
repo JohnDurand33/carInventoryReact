@@ -9,7 +9,7 @@ function Navbar() {
     
     const signOutOnClick = () => {
         signOut(auth)
-        location.reload(); //refreshes page
+        location.reload(); 
     }
 
     const signInOnClick = async () => {
@@ -35,7 +35,7 @@ function Navbar() {
                     onClick={clicked}
                     className="font-semibold text-xl tracking-tight"
                 >
-                    Digit
+                    Car Collection
                 </Link>
             </div>
             <div className="block">
